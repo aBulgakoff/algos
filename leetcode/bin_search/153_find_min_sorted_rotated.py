@@ -7,6 +7,7 @@ test_data = [
     ([4, 5, 6, 7, 0, 1, 2], 0),
     ([], -1),
     ([3, 1, 2], 1),
+    ([3, 1, 0], 0)
 ]
 
 
@@ -33,7 +34,10 @@ class Solution:
                     return bin_search(pivot, right)
             else:
                 if nums[pivot - 1] > nums[pivot]:
-                    return pivot
+                    if nums[pivot] < nums[pivot + 1]:
+                        return pivot
+                    else:
+                        return bin_search(pivot, right)
                 else:
                     return bin_search(left, pivot)
 
