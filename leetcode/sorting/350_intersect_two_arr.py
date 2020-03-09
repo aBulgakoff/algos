@@ -59,3 +59,13 @@ class Solution3:
                 result.extend(char for _ in range(min(nums1_symbol_appearance[char], nums2_symbol_appearance[char])))
 
         return result
+
+
+from collections import Counter
+from itertools import chain
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        product = Counter(nums1) & Counter(nums2)
+        return [*chain(*map(lambda char: (char for _ in range(product[char])), product))]
