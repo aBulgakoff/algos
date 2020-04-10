@@ -20,11 +20,9 @@ class Trie:
         word = word + '.'
         node = self.root
         for symbol in word:
-            if symbol in node:
-                node = node[symbol]
-            else:
+            if symbol not in node:
                 node[symbol] = {}
-                node = node[symbol]
+            node = node[symbol]
 
     def search(self, word: str) -> bool:
         """
@@ -34,7 +32,7 @@ class Trie:
             node = iterate_trie(self.root, word)
         except KeyError:
             return False
-        return True if '.' in node else False
+        return '.' in node
 
     def startsWith(self, prefix: str) -> bool:
         """
