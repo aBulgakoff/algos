@@ -1,3 +1,6 @@
+from itertools import zip_longest
+
+
 def pop_before_sharp(text: str) -> str:
     result = []
     for symbol in text:
@@ -5,7 +8,6 @@ def pop_before_sharp(text: str) -> str:
             result.pop() if result else ''
             continue
         result.append(symbol)
-    print(result)
     return ''.join(result)
 
 
@@ -14,16 +16,13 @@ class Solution:
         return pop_before_sharp(S) == pop_before_sharp(T)
 
 
-from itertools import zip_longest
-
-
 def generate_excluding_sharp(text):
-    skip_next = 0
+    qty_symbols_skip = 0
     for symbol in reversed(text):
         if symbol == '#':
-            skip_next += 1
-        elif skip_next:
-            skip_next -= 1
+            qty_symbols_skip += 1
+        elif qty_symbols_skip:
+            qty_symbols_skip -= 1
         else:
             yield symbol
 
