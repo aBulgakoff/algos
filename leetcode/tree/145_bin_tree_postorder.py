@@ -34,7 +34,8 @@ class Solution2:
         while node or stack:
             while node:
                 # push right on to stack before current node
-                if node.right: stack.append(node.right)
+                if node.right:
+                    stack.append(node.right)
                 # push current node onto stack and move left
                 stack.append(node)
                 node = node.left
@@ -56,4 +57,20 @@ class Solution2:
                 # process current and set it to None
                 result.append(node.val)
                 node = None
+        return result
+
+
+class Solution3:    # stack and set
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        stack, postorder, result = [root], set(), []
+        while stack and stack[-1]:
+            node = stack[-1]
+            if node.left and node.left not in postorder:
+                stack.append(node.left)
+            elif node.right and node.right not in postorder:
+                stack.append(node.right)
+            else:
+                node = stack.pop()
+                postorder.add(node)
+                result.append(node.val)
         return result

@@ -13,3 +13,14 @@ class Solution:
             if product:
                 heapq.heappush(stones, product)
         return -1 * heapq.heappop(stones) if stones else 0
+
+
+class Solution2:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stones[:] = (-1 * stone for stone in stones)
+        heapq.heapify(stones)
+        while len(stones) > 1:
+            heapq.heappush(
+                stones,
+                heapq.heappop(stones) - heapq.heappop(stones))
+        return -1 * heapq.heappop(stones)
