@@ -10,7 +10,7 @@ if __name__ == '__main__':
         result_w_qty[
             tuple([frozenset(all_vows_of_word), len(word)])
         ].append(len(all_vows_of_word))
-
+    print(result_w_qty)
     result_w_average = {k: sum(v) / len(v) for k, v in result_w_qty.items()}
 
     print('\n'.join(f'{set(k[0]), k[1]} -> {int(v) if int(v) == v else v}'
