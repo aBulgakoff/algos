@@ -1,3 +1,4 @@
+from bisect import bisect_left
 from typing import List
 
 import pytest
@@ -73,3 +74,23 @@ class Solution:
 
         result_target = bin_search(left, right)
         return result_target if nums[result_target] == target else -1
+
+
+class Solution2:
+    def search(self, nums: List[int], target: int) -> int:
+        index, left, right = 0, 0, len(nums) - 1
+        if not nums:
+            return -1
+
+        while left < right - 1:
+            mid = (left + right) // 2
+            if nums[left] > nums[mid]:
+                right = mid
+            else:
+                left = mid
+
+        if nums[-1] < target or nums[0] < nums[-1]:
+            index = bisect_left(nums, target, hi=right)
+        else:
+            index = bisect_left(nums, target, lo=right)
+        return index if nums[index] == target else -1
