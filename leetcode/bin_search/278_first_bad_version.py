@@ -34,7 +34,7 @@ class Solution:
             return -1
 
         def bin_search(left, right):
-            if left < right -1:
+            if left < right - 1:
                 pivot = (left + right) // 2
             elif isBadVersion(left):
                 return left
@@ -54,3 +54,19 @@ class Solution:
                 return bin_search(pivot, right)
 
         return bin_search(1, n)
+
+
+class Solution2:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        left, right = 0, n
+        while left < right - 1:
+            mid = (right + left) // 2
+            if isBadVersion(mid):
+                right = mid
+            else:
+                left = mid
+        return right if not isBadVersion(left) else left
