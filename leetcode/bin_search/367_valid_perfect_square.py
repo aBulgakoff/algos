@@ -46,3 +46,35 @@ class Solution:
                 return bin_search(left, pivot)
 
         return bin_search(0, num // 2)
+
+
+class Solution2:    # O(logN) time, 0(1) space
+    def isPerfectSquare(self, num: int) -> bool:
+        if not num:
+            return False
+        elif num == 1:
+            return True
+
+        left, right = 2, num
+
+        while left < right - 1:
+            mid = (left + right) // 2
+
+            if mid ** 2 > num:
+                right = mid
+            else:
+                left = mid
+
+        return any(map(lambda x: num == x ** 2, (left, right)))
+
+
+class Solution3:  # O(logN) time, O(1) space # Newton's Method
+    def isPerfectSquare(self, num: int) -> bool:
+        if not num:
+            return False
+        elif num == 1:
+            return True
+        right = num // 2
+        while right ** 2 > num:
+            right = (right + num // right) // 2
+        return right ** 2 == num
