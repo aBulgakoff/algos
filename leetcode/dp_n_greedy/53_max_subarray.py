@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:  # greedy
+class Solution:  # greedy # Kadane's algorithm
     def maxSubArray(self, nums: List[int]) -> int:
         local_max = global_max = nums[0]
         for ix in range(1, len(nums)):
