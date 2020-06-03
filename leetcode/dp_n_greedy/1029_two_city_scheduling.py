@@ -10,3 +10,13 @@ class Solution:
             ix_a += 1
             ix_b -= 1
         return min_costs
+
+
+# Sort by a gain which company has
+# by sending a person to city A and not to city B
+
+class Solution2:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        n = len(costs) // 2
+        costs.sort(key=lambda x: x[0] - x[1])
+        return sum(a for a, _ in costs[:n]) + sum(b for _, b in costs[n:])
